@@ -44,18 +44,20 @@ namespace RuleEngineTester.Services
             IList<string> output = new List<string>();
             items.ToList().ForEach(person =>
             {
-                output.Add(WriteStatus(person.Validate(_ruleProcessor)));
+                (IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) validation = person.Validate(_ruleProcessor);
+                output.Add(WriteInfoValidated(validation));
+                output.Add(GenerateFailedFieldMessage(validation.failedFields));
+                output.Add(" ");
             });
             return output;
         }
 
-        private string WriteStatus((IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
+        private string WriteInfoValidated((IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
         {
-            var msg = $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - {value.status.ToString()} the rules engine check!";
+            if (value.failedFields == null || value.failedFields.Count() == 0)
+                return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - PASSED";
 
-            msg += GenerateFailedFieldMessage(value.failedFields);
-
-            return msg;
+            return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - {GenerateFailedFieldMessage(value.failedFields)}";
         }
     }
 }

@@ -37,13 +37,12 @@ namespace RuleEngineTester.Services
             return cars;
         }
 
-        private string WriteStatus((ICar item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
+        private string WriteInfoValidated((ICar item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
         {
-            var msg = $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - {value.status.ToString()} the rules engine check!";
+            if (value.failedFields == null || value.failedFields.Count() == 0)
+                return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - PASSED";
 
-            msg += GenerateFailedFieldMessage(value.failedFields);
-
-            return msg;
+            return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - {GenerateFailedFieldMessage(value.failedFields)}";
         }
 
         public IList<string> ValidateList(IEnumerable<ICar> items)
@@ -51,7 +50,8 @@ namespace RuleEngineTester.Services
             IList<string> output = new List<string>();
             items.ToList().ForEach(car =>
             {
-                output.Add(WriteStatus(car.Validate(_ruleProcessor)));
+                output.Add(WriteInfoValidated(car.Validate(_ruleProcessor)));
+                output.Add(" ");
             });
             return output;
         }

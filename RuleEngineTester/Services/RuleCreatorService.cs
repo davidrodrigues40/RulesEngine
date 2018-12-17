@@ -52,8 +52,7 @@ namespace RuleEngineTester.Services
 
             List<Rule> personRules = new List<Rule>
             {
-                new Rule("FirstName", null, "S", "StartsWith"),
-                new Rule("LastName", null, "Rule", "Contains")
+                new Rule("FirstName", null, "S", "StartsWith")
             };
 
             PersonRules = personRules.GenerateRules<IPerson>();

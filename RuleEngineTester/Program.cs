@@ -64,12 +64,14 @@ namespace RuleEngineTester
         private static void ValidateData()
         {
             // validate cars
+            Console.WriteLine("Year must be greater than 2012, make must be Ford and model must be coupe");
             foreach (string output in _carService.ValidateList(_cars))
                 Console.WriteLine(output);
 
             Console.WriteLine("----------------------------------------------------------------");
 
             // validate customers
+            Console.WriteLine("First Name must start with the letter S");
             foreach (string output in _personService.ValidateList(_customers))
                 Console.WriteLine(output);
         }

@@ -7,9 +7,9 @@
             if (failedFields != null)
             {
                 if (failedFields.Length == 1)
-                    return $" {failedFields[0]} is invalid.";
+                    return $"{failedFields[0]} is invalid.";
                 else
-                    return $" {string.Join(", ", failedFields)} are invalid.";
+                    return $"{string.Join(", ", failedFields)} are invalid.";
             }
             return string.Empty;
         }
