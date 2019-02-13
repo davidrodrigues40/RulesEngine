@@ -3,7 +3,7 @@ using RulesEngine.Services;
 
 namespace RuleEngineTester.Services
 {
-    public class CarRulesProcessor : RuleProcessor<ICar>, ICarRulesProcessor
+    public class CarRulesProcessor : RuleProcessor<Car>, ICarRulesProcessor
     {
     }
 }

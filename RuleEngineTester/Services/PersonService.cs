@@ -16,7 +16,7 @@ namespace RuleEngineTester.Services
             _ruleProcessor.AddRules(RuleCreatorService.PersonExpressions);
         }
 
-        public IEnumerable<IPerson> Get()
+        public IEnumerable<Customer> Get()
         {
             List<Customer> customers = new List<Customer>();
 
@@ -34,24 +34,24 @@ namespace RuleEngineTester.Services
             return customers;
         }
 
-        public (IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) ValidateList(IPerson item)
+        public (Customer item, RuleEnumerators.RuleStatus status, string[] failedFields) ValidateList(Customer item)
         {
             return _ruleProcessor.Process(item);
         }
 
-        public IList<string> ValidateList(IEnumerable<IPerson> items)
+        public IList<string> ValidateList(IEnumerable<Customer> items)
         {
             IList<string> output = new List<string>();
             items.ToList().ForEach(person =>
             {
-                (IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) validation = person.Validate(_ruleProcessor);
+                (Customer item, RuleEnumerators.RuleStatus status, string[] failedFields) validation = person.Validate(_ruleProcessor);
                 output.Add(WriteInfoValidated(validation));
                 output.Add(" ");
             });
             return output;
         }
 
-        private string WriteInfoValidated((IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
+        private string WriteInfoValidated((Customer item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
         {
             if (value.failedFields == null || value.failedFields.Count() == 0)
                 return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - PASSED";

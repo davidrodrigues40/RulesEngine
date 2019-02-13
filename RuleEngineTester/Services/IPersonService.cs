@@ -2,7 +2,7 @@
 
 namespace RuleEngineTester.Services
 {
-    public interface IPersonService : IService<IPerson>
+    public interface IPersonService : IService<Customer>
     {
     }
 }

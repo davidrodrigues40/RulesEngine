@@ -3,7 +3,7 @@ using RulesEngine.Services;
 
 namespace RuleEngineTester.Services
 {
-    public class PersonRulesProcessor : RuleProcessor<IPerson>, IPersonRuleProcessor
+    public class PersonRulesProcessor : RuleProcessor<Customer>, IPersonRuleProcessor
     {
     }
 }

@@ -6,7 +6,7 @@ namespace RuleEngineTester.Extensions
 {
     public static class PersonExtension
     {
-        public static (IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) Validate(this IPerson item, IPersonRuleProcessor processor)
+        public static (Customer item, RuleEnumerators.RuleStatus status, string[] failedFields) Validate(this Customer item, IPersonRuleProcessor processor)
         {
             return processor.Process(item);
         }

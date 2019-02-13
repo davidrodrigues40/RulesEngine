@@ -6,7 +6,7 @@ namespace RuleEngineTester.Extensions
 {
     public static class CarExtension
     {
-        public static (ICar item, RuleEnumerators.RuleStatus status, string[] failedFields) Validate(this ICar item, ICarRulesProcessor processor)
+        public static (Car item, RuleEnumerators.RuleStatus status, string[] failedFields) Validate(this Car item, ICarRulesProcessor processor)
         {
             return processor.Process(item);
         }

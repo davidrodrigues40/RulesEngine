@@ -18,7 +18,7 @@ namespace RuleEngineTester.Services
             _ruleProcessor = ruleProcessor;
             _ruleProcessor.AddRules(RuleCreatorService.CarExpressions);
         }
-        public IEnumerable<ICar> Get()
+        public IEnumerable<Car> Get()
         {
             var cars = new List<Car>();
 
@@ -37,7 +37,7 @@ namespace RuleEngineTester.Services
             return cars;
         }
 
-        private string WriteInfoValidated((ICar item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
+        private string WriteInfoValidated((Car item, RuleEnumerators.RuleStatus status, string[] failedFields) value)
         {
             if (value.failedFields == null || value.failedFields.Count() == 0)
                 return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - PASSED";
@@ -45,7 +45,7 @@ namespace RuleEngineTester.Services
             return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - FAILED. REASON: {GenerateFailedFieldMessage(value.failedFields, RuleCreatorService.CarRules)}";
         }
 
-        public IList<string> ValidateList(IEnumerable<ICar> items)
+        public IList<string> ValidateList(IEnumerable<Car> items)
         {
             IList<string> output = new List<string>();
             items.ToList().ForEach(car =>

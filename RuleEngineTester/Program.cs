@@ -10,8 +10,8 @@ namespace RuleEngineTester
     {
         private static ICarService _carService;
         private static IPersonService _personService;
-        private static IEnumerable<ICar> _cars;
-        private static IEnumerable<IPerson> _customers;
+        private static IEnumerable<Car> _cars;
+        private static IEnumerable<Customer> _customers;
         private static ServiceProvider _serviceProvider;
         public static void Main(string[] args)
         {

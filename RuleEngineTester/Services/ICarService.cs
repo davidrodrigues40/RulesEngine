@@ -2,7 +2,7 @@
 
 namespace RuleEngineTester.Services
 {
-    public interface ICarService : IService<ICar>
+    public interface ICarService : IService<Car>
     {
     }
 }

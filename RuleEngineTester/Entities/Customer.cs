@@ -1,6 +1,6 @@
 ﻿namespace RuleEngineTester.Entities
 {
-    public class Customer : IPerson
+    public class Customer
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

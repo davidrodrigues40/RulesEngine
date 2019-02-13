@@ -15,7 +15,7 @@ namespace RuleEngineTester.Services
         /// <value>
         /// The car rules.
         /// </value>
-        public static List<Func<ICar, bool>> CarExpressions { get; private set; }
+        public static List<Func<Car, bool>> CarExpressions { get; private set; }
 
         public static List<Rule> CarRules { get; private set; }
 
@@ -25,7 +25,7 @@ namespace RuleEngineTester.Services
         /// <value>
         /// The person rules.
         /// </value>
-        public static List<Func<IPerson, bool>> PersonExpressions { get; private set; }
+        public static List<Func<Customer, bool>> PersonExpressions { get; private set; }
 
         public static List<Rule> PersonRules { get; private set; }
 
@@ -43,12 +43,12 @@ namespace RuleEngineTester.Services
         {
             CarRules = new List<Rule>
             {
-                new Rule("Year", ExpressionType.GreaterThan, "2012"),
+                new Rule("Drive", ExpressionType.GreaterThan, "2012"),
                 new Rule("Make", ExpressionType.Equal, "Ford"),
                 new Rule("Style", ExpressionType.Equal, "Coupe")
             };
 
-            CarExpressions = CarRules.GenerateRules<ICar>();
+            CarExpressions = CarRules.GenerateRules<Car>();
         }
 
         private static void CompilePersonRules()
@@ -59,7 +59,7 @@ namespace RuleEngineTester.Services
                 new Rule("FirstName", null, "S", "StartsWith")
             };
 
-            PersonExpressions = PersonRules.GenerateRules<IPerson>();
+            PersonExpressions = PersonRules.GenerateRules<Customer>();
         }
     }
 }

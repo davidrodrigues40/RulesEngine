@@ -23,7 +23,12 @@ namespace RulesEngine.Services
             if (Rules == null || Rules.Count == 0)
                 throw new MissingFieldException("Missing Rules");
 
-            var failures = Rules.Where(rule => !rule(input));
+            foreach (var rule in Rules)
+            {
+                rule(input);
+            }
+
+            var failures = Rules.Where(rule => rule != null ? !rule(input) : false);
 
             if (failures == null || failures.Count() == 0)
                 return (input, RuleEnumerators.RuleStatus.Passed, null);
