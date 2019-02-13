@@ -1,6 +1,6 @@
 ﻿namespace RuleEngineTester.Entities
 {
-    public class BaseVehicle
+    public abstract class BaseVehicle
     {
         public int Year { get; set; }
         public string Make { get; set; }

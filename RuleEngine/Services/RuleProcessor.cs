@@ -7,7 +7,7 @@ namespace RulesEngine.Services
 {
     public class RuleProcessor<T> : IRuleProcessor<T>
     {
-        private List<Func<T, bool>> _rules;
+        public List<Func<T, bool>> Rules { get; private set; }
 
         public RuleProcessor()
         {
@@ -15,15 +15,16 @@ namespace RulesEngine.Services
 
         public void AddRules(List<Func<T, bool>> rules)
         {
-            _rules = rules;
+            Rules = rules;
         }
 
         public (T item, RuleEnumerators.RuleStatus status, string[] failedFields) Process(T input)
         {
-            if (_rules == null || _rules.Count == 0)
+            if (Rules == null || Rules.Count == 0)
                 throw new MissingFieldException("Missing Rules");
 
-            var failures = _rules.Where(rule => !rule(input));
+            var failures = Rules.Where(rule => !rule(input));
+
             if (failures == null || failures.Count() == 0)
                 return (input, RuleEnumerators.RuleStatus.Passed, null);
             else

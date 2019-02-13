@@ -13,7 +13,7 @@ namespace RuleEngineTester.Services
         public PersonService(IPersonRuleProcessor processor)
         {
             _ruleProcessor = processor;
-            _ruleProcessor.AddRules(RuleCreatorService.PersonRules);
+            _ruleProcessor.AddRules(RuleCreatorService.PersonExpressions);
         }
 
         public IEnumerable<IPerson> Get()
@@ -46,7 +46,6 @@ namespace RuleEngineTester.Services
             {
                 (IPerson item, RuleEnumerators.RuleStatus status, string[] failedFields) validation = person.Validate(_ruleProcessor);
                 output.Add(WriteInfoValidated(validation));
-                output.Add(GenerateFailedFieldMessage(validation.failedFields));
                 output.Add(" ");
             });
             return output;
@@ -57,7 +56,7 @@ namespace RuleEngineTester.Services
             if (value.failedFields == null || value.failedFields.Count() == 0)
                 return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - PASSED";
 
-            return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - {GenerateFailedFieldMessage(value.failedFields)}";
+            return $"Person: {value.item.FirstName} {value.item.MiddleName} {value.item.LastName} - FAILED. REASON: {GenerateFailedFieldMessage(value.failedFields, RuleCreatorService.PersonRules)}";
         }
     }
 }

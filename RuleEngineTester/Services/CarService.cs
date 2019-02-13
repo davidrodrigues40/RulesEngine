@@ -16,7 +16,7 @@ namespace RuleEngineTester.Services
         public CarService(ICarRulesProcessor ruleProcessor)
         {
             _ruleProcessor = ruleProcessor;
-            _ruleProcessor.AddRules(RuleCreatorService.CarRules);
+            _ruleProcessor.AddRules(RuleCreatorService.CarExpressions);
         }
         public IEnumerable<ICar> Get()
         {
@@ -42,7 +42,7 @@ namespace RuleEngineTester.Services
             if (value.failedFields == null || value.failedFields.Count() == 0)
                 return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - PASSED";
 
-            return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - {GenerateFailedFieldMessage(value.failedFields)}";
+            return $"Vehicle: {value.item.Year.ToString()} {value.item.Make} {value.item.Style} - FAILED. REASON: {GenerateFailedFieldMessage(value.failedFields, RuleCreatorService.CarRules)}";
         }
 
         public IList<string> ValidateList(IEnumerable<ICar> items)
